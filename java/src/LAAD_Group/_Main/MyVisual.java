@@ -41,7 +41,7 @@ public class MyVisual extends Visual
 
         
         // Call this instead to read audio from the microphone
-        startListening();      
+        //startListening();      
     }
     
     public void keyPressed()
@@ -50,6 +50,7 @@ public class MyVisual extends Visual
         {
             getAudioPlayer().cue(0);
             getAudioPlayer().play();
+            
         }
         
         
@@ -78,11 +79,11 @@ public class MyVisual extends Visual
         
             andrei.draw();
         
-            dan.draw();
+            //dan.draw();
         
-            albert.draw();
+            //albert.draw();
         
-            ledion.draw();
+            //ledion.draw();
         
     }
 }
