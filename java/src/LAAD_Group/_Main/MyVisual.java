@@ -10,11 +10,11 @@ public class MyVisual extends Visual
     C21390151 dan;
 
     boolean startAndrei;
-    boolean startDan;
+    public boolean startDan;
     boolean startAlbert;
     boolean startLedion;
 
-    
+    int currentVisual = 0;
      
     public void settings()
     {
@@ -52,8 +52,18 @@ public class MyVisual extends Visual
             getAudioPlayer().play();
             
         }
-        
-        
+        if(key == '1'){
+            currentVisual = 1;
+        }
+        if(key == '2'){
+            currentVisual = 2;
+        }
+        if(key == '3'){
+            currentVisual = 3;
+        }
+        if(key == '4'){
+            currentVisual = 4;
+        }      
       
     }
 
@@ -75,15 +85,23 @@ public class MyVisual extends Visual
 
         // Call this is you want to get the average amplitude
         calculateAverageAmplitude();
-        
-        
-            andrei.draw();
-        
-            //dan.draw();
-        
-            //albert.draw();
-        
-            //ledion.draw();
+        switch (currentVisual) {
+            case 1:
+                andrei.draw();
+                break;
+            case 2:
+                dan.draw();
+                break;
+            case 3:
+                albert.draw();
+                break;
+            case 4:
+                ledion.draw();
+                break;
+            default:
+                break;
+        }
         
     }
+    
 }
