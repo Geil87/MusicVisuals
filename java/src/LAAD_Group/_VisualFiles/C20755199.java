@@ -59,18 +59,18 @@ public class C20755199 extends Visual {
             float x = mv.random(mv.width);
             float y = mv.random(mv.height);
             float size = mv.random(20, 50);
-            spheres.add(new Sphere(x, y, size, sphereSpeed, mv));
+            spheres.add(new Sphere(x, y, 0,size, 10, mv));
         }
 
         // Update and draw the spheres
         float cx = mv.width / 2;
         float cy = mv.height / 2;
         for (Sphere sphere : spheres) {
-            sphere.moveTowardsCircle(cx, cy);
+            sphere.moveTowardsCircle(cx, cy, 0);
             sphere.draw();
         }
     }
-
+    
     void Electrical(float amplitude) {
         mv.noFill(); // Don't fill the shape
         mv.strokeWeight(2); // Set the stroke weight to 2
@@ -85,7 +85,9 @@ public class C20755199 extends Visual {
         float x = mv.width / 2; // Set the x-coordinate of the circle to the center of the canvas
         float y = mv.height / 2; // Set the y-coordinate of the circle to the center of the canvas
         mv.ellipse(x, y, newCircleDiameter, newCircleDiameter); // Draw the circle
+        
 
+       
         // Draw the electricity coming out of the edges of the circle
         float angleIncrement = TWO_PI / 40; // Set the angle increment between each line segment
         float angle = 0; // Initialize the angle
@@ -120,36 +122,45 @@ public class C20755199 extends Visual {
 
         // Add a glowing effect to the circle
         float glowSize = (float) (newCircleDiameter * 6.3f); // Calculate the size of the glow
-        float glowOpacity = PApplet.map(PApplet.sin((float) (millis() / 100.0)), -1, 1, 250, 350);
-        mv.strokeWeight(6);
+        float glowOpacity = PApplet.map(PApplet.sin((float) (millis() / 100.0)), -1, 1, 0, 0);
+        mv.strokeWeight(1);
+        mv.pushMatrix();
+        mv.translate(mv.width/2,mv.height/2,0);
+        mv.sphere(glowSize/2);
+        
+        mv.popMatrix();
         mv.stroke(0, 0, 255, glowOpacity + 50);
         mv.ellipse(x, y, glowSize, glowSize); // Draw the glowing circle
+        
     }
 
 }
 
 class Sphere {
-    float x, y;
+    float x, y, z;
     float size;
     float speed;
     MyVisual mv;
     C20755199 c = new C20755199(mv);
 
-    Sphere(float x, float y, float size, float speed, MyVisual m) {
+    Sphere(float x, float y, float z, float size, float speed, MyVisual m) {
         this.x = x;
         this.y = y;
+        this.z = z;
         this.size = size;
         this.speed = speed;
         this.mv = m;
     }
 
-    void moveTowardsCircle(float cx, float cy) {
+    void moveTowardsCircle(float cx, float cy, float cz) {
         float dx = cx - x;
         float dy = cy - y;
-        float distance = PApplet.sqrt(dx * dx + dy * dy);
+        float dz = cz - z;
+        float distance = PApplet.sqrt(dx * dx + dy * dy + dz * dz);
         if (distance > 430) {
             x += dx / distance * speed;
             y += dy / distance * speed;
+            z += dz / distance * speed;
         } else {
             destroy();
         }
@@ -158,7 +169,10 @@ class Sphere {
     void draw() {
         mv.noStroke();
         mv.fill(255, 0, 0);
-        mv.ellipse(x, y, size, size);
+        mv.pushMatrix();
+        mv.translate(x, y, z);
+        mv.sphere(size);
+        mv.popMatrix();
     }
 
     void destroy() {
