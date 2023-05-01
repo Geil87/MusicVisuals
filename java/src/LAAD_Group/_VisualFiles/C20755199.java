@@ -19,7 +19,7 @@ public class C20755199 extends Visual {
     }
 
     public void draw() {
-        //mv.background(0);
+        mv.background(0);
         mv.camera();
         float level = mv.getAmplitude();
         mv.fill(255);

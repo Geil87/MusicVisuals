@@ -19,7 +19,10 @@ public class C21390151 extends Visual {
         //mv.noFill();
         mv.lights();
         mv.stroke(map(mv.getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
-        mv.camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
+        if(mv.currentVisual != 5){
+            mv.camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
+        }
+        
         
         
         mv.translate(width / 2, height / 2, -250);

@@ -14,7 +14,7 @@ public class MyVisual extends Visual
     boolean startAlbert;
     boolean startLedion;
 
-    int currentVisual = 0;
+    public int currentVisual = 0;
      
     public void settings()
     {
@@ -63,7 +63,11 @@ public class MyVisual extends Visual
         }
         if(key == '4'){
             currentVisual = 4;
-        }      
+        }    
+        if(key == '5')
+        {
+            currentVisual = 5;
+        }  
       
     }
 
@@ -71,6 +75,10 @@ public class MyVisual extends Visual
     {
         //super.draw();
         background(0);
+
+        textSize(100);
+        textAlign(CENTER); // Set text alignment to center
+        text("Press Space to play music,\n1: Andrei\n2: Dan\n3: Albert\n4: Ledion\n5: Play All", width/2,100 );
         try
         {
              //Call this if you want to use FFT data
@@ -97,6 +105,12 @@ public class MyVisual extends Visual
                 break;
             case 4:
                 ledion.draw();
+                break;
+            case 5:
+                
+                andrei.draw();
+                dan.draw();
+               
                 break;
             default:
                 break;
