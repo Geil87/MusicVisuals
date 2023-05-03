@@ -15,16 +15,15 @@ public class C21390151 extends Visual {
 
     public void draw() {
         mv.calculateAverageAmplitude();
-        //mv.background(0);
-        //mv.noFill();
+        // mv.background(0);
+        // mv.noFill();
         mv.lights();
         mv.stroke(map(mv.getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
-        if(mv.currentVisual != 5){
-            mv.camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
+        if (mv.currentVisual != 5) {
+            mv.camera(0, 0, 300, 0, 0, -1, 0, 1, 0);
+
         }
-        
-        
-        
+
         mv.translate(width / 2, height / 2, -250);
 
         float cubeSize = 50 + (mv.getSmoothedAmplitude() * 500);
@@ -62,7 +61,7 @@ public class C21390151 extends Visual {
         }
 
         angle += 0.01f + mv.getAmplitude() * 0.1f;
-        
+
     }
 
 }
